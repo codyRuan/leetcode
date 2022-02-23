@@ -16,6 +16,7 @@ public:
             sum += (int(columnTitle[i]) - ascii) * pow(N,i);
         }
         return sum;
+        
     }
 };
 // @lc code=end
