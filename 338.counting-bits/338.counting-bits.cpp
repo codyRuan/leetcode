@@ -8,18 +8,9 @@
 class Solution {
 public:
     vector<int> countBits(int n) {
-        int exp_2 = 1;
-        vector<int> res;
-        res.push_back(0);
+        vector<int> res(n+1,0);
         for (int i = 1; i <= n; i++) {
-            int threshold = 1 << exp_2;
-            int prvhold = 1 << (exp_2-1);
-            if (i == threshold-1) res.push_back(exp_2);
-            else if (i < threshold) res.push_back(1+res[i-prvhold]);
-            else {
-                res.push_back(1);
-                exp_2++;
-            }
+            res[i] = 1 + res[i&(i-1)];
         }
         return res;
     }
