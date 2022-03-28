@@ -9,12 +9,13 @@ class Solution {
 public:
     vector<int> partitionLabels(string s) {
         int start = 0, end = 0;
-        vector<bool> visited(26,false);
+        vector<int> last(26,-1);
+        for (int i = 0; i < s.size(); i++) {
+            last[s[i]-'a'] = i;
+        }
         vector<int> res;
         for (int i = 0; i < s.size(); i++) {
-            char c = s[i];
-            if (visited[c-'a']) continue;
-            end = max(end, int(s.rfind(c)));
+            end = max(end, last[s[i]-'a']);
             if (i == end) {
                 res.push_back(end-start+1);
                 start = i+1;
