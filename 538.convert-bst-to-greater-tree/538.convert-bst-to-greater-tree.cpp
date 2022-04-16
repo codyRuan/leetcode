@@ -20,24 +20,17 @@ class Solution {
 public:
     TreeNode* convertBST(TreeNode* root) {
         int count = 0;
-        vector<TreeNode*> stk;
-        TreeNode* ptr = root;
-        while (ptr || !stk.empty()) {
-            if (ptr) {
-                stk.push_back(ptr);
-                ptr = ptr -> right;
-            }
-            else {
-                TreeNode* node = stk.back();
-                stk.pop_back();
-                node -> val += count;
-                count = node -> val;
-                ptr = node -> left;
-            }
-        }
+        travesal(root, count);
         return root;
     }
-    
+    void travesal(TreeNode* root, int &count) {
+        if (root) {
+            travesal(root->right, count);
+            root->val += count;
+            count = root->val;
+            travesal(root->left, count);
+        }
+    }
 };
 // @lc code=end
 
